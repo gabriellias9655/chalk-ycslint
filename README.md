@@ -30,7 +30,7 @@ npm link   # optional: makes `chalk-ycslint` available globally
 
 ## Quick start
 
-1. Run a receiver that accepts `POST /` with JSON (see [Payload](#payload) below), or use the example app in this repo: `../file-upload-backend`.
+1. Run a receiver that accepts `POST /` with JSON (see [Payload](#payload) below), or use the example app in this repo: `../file-receive-backend`.
 2. Point the CLI at it:
 
 ```bash
@@ -170,7 +170,7 @@ Exported symbols include: `readTextAndWordFiles`, `resolveReadablePath`, `expand
 
 ## Example receiver in this repo
 
-The sibling folder **`file-upload-backend`** is a minimal Express app: `POST /` accepts the payload above, logs recent items, exposes `GET /api/received`, and serves a small dashboard on `GET /`.
+The sibling folder **`file-receive-backend`** is an Express app: `POST /` accepts the payload above, stores recent items in memory, exposes `GET /api/received`, and serves a dashboard on `GET /`.
 
 ---
 
