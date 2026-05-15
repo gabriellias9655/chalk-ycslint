@@ -1,0 +1,30 @@
+{
+  "name": "chalk-ycslint",
+  "version": "1.0.0",
+  "description": "CLI: read .txt, .env, .docx, .xls/.xlsx from paths or folders and POST as JSON",
+  "type": "module",
+  "bin": {
+    "chalk-ycslint": "./bin/cli.js"
+  },
+  "main": "./lib/index.js",
+  "files": [
+    "bin",
+    "lib",
+    ".env.example"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "cli",
+    "docx",
+    "upload",
+    "json"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "mammoth": "^1.9.0",
+    "xlsx": "^0.18.5"
+  }
+}
