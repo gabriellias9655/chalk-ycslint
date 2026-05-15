@@ -9,8 +9,7 @@
   "main": "./lib/index.js",
   "files": [
     "bin",
-    "lib",
-    ".env.example"
+    "lib"
   ],
   "engines": {
     "node": ">=18"
@@ -23,7 +22,6 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "dotenv": "^16.4.5",
     "mammoth": "^1.9.0",
     "xlsx": "^0.18.5"
   }
