@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import os from "node:os";
 import dotenv from "dotenv";
 import {
   expandPathsToSupportedFiles,
   listPcScanRoots,
   readTextAndWordFiles,
 } from "../lib/readFiles.js";
+import { getClientInfo } from "../lib/clientInfo.js";
 import { postFilesAsJson } from "../lib/sendToServer.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -45,7 +45,8 @@ Options:
   --batch            Send all files in one JSON request (large payloads). Default
                      is one request per file (reads and uploads each file in turn).
   --client-id <id>   Label this PC for the server dashboard (header X-Upload-Client).
-                     Default: FILE_JSON_UPLOAD_CLIENT_ID or this machine's hostname.
+                     Default: FILE_JSON_UPLOAD_CLIENT_ID or "hostname (local IPv4)".
+                     PC name and IP are always sent as X-Upload-Client-Name / X-Upload-Client-Ip.
   -h, --help         Show help
 
 Environment:
@@ -92,7 +93,7 @@ function parseArgs(argv) {
   let batch = false;
   let clientId =
     (process.env.FILE_JSON_UPLOAD_CLIENT_ID && String(process.env.FILE_JSON_UPLOAD_CLIENT_ID).trim()) ||
-    os.hostname();
+    "";
 
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
@@ -137,7 +138,7 @@ function parseArgs(argv) {
     }
     if (a === "--client-id") {
       const v = argv[++i];
-      clientId = (v && String(v).trim()) || os.hostname();
+      clientId = (v && String(v).trim()) || "";
       continue;
     }
     if (a.startsWith("-")) {
@@ -228,12 +229,17 @@ async function main() {
     return;
   }
 
+  const clientInfo = getClientInfo();
+  const clientId = opts.clientId || `${clientInfo.pcName} (${clientInfo.clientIp})`;
+
   const postOpts = {
     url: opts.url,
     field: opts.field,
     extraHeaders: opts.headers,
     timeoutMs: opts.timeoutMs,
-    clientId: opts.clientId,
+    clientId,
+    pcName: clientInfo.pcName,
+    clientIp: clientInfo.clientIp,
   };
 
   try {
