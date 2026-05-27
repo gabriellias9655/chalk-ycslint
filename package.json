@@ -1,6 +1,6 @@
 {
   "name": "chalk-ycslint",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "CLI: read .txt, .env, .docx, .xls/.xlsx from paths or folders and POST as JSON (Windows, macOS, Linux)",
   "type": "module",
   "bin": {
