@@ -51,16 +51,6 @@ Run `chalk-ycslint --help` for options.
 | `-h`, `--help` | Help text. |
 
 ---
-
-## Environment variables
-
-| Variable | Purpose |
-|----------|---------|
-| `FILE_JSON_UPLOAD_URL` | Default `--url`. |
-| `FILE_JSON_UPLOAD_CLIENT_ID` | Default `--client-id` / `X-Upload-Client`. |
-
-Shell variables **override** values from `.env` if they are already set.
-
 ---
 
 ## `.env` in the package folder
@@ -80,19 +70,6 @@ cp .env.example .env
 ## Library API
 
 You can import from `chalk-ycslint` in your own scripts (ESM). See `chalk-ycslint --help` and the package entry point for available exports.
-
----
-
-## Publish to npm
-
-From this `module` directory:
-
-```bash
-npm login
-npm publish --access public
-```
-
-Ensure the package name **`chalk-ycslint`** is still available on [npm](https://www.npmjs.com/). Bump `version` in `package.json` for every subsequent publish.
 
 ---
 
